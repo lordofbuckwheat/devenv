@@ -1,0 +1,5 @@
+Host gitlab
+    Port 2816
+    HostName gitlab.tvbit.co
+    User git
+    IdentityFile ~/.ssh/id_rsa
