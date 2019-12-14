@@ -22,4 +22,4 @@ if [ ! -d supertvbit ]; then
   git checkout master
   cd /root/wd
 fi
-bash
+zsh
