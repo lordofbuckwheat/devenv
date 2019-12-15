@@ -1,0 +1,46 @@
+{
+  "Db": {
+    "ConnectString": "root:root@tcp(localhost:3306)/tvbit",
+    "PathToMysqlDump": "mysqldump"
+  },
+  "ClickHouseDB": {
+    "ConnectString": "tcp://localhost:9000?username=default&password=&database=tvbit"
+  },
+  "StatisticsApi": {
+    "ServerAddress": "go.tvbit.co:8385",
+    "ServerAddressSSL": "go.tvbit.co:8386",
+    "ExternalServerAddress": "http://go.tvbit.co:8385",
+    "ExternalServerAddressSSL": "https://go.tvbit.co:8386",
+    "SSLCertFile": "/etc/nginx/ssl/tvbit.co.crt",
+    "SSLKeyFile": "/etc/nginx/ssl/tvbit.co.key",
+    "AggregationInterval": 300,
+    "PrimaryDataLifetime": 7
+  },
+  "Api": {
+    "ServerAddress": "go.tvbit.co:8285",
+    "ServerAddressSSL": "go.tvbit.co:8286",
+    "IndexPageUrl": "http://public.tvbit.co/public/index.html",
+    "SecureIndexPageURL": "https://public.tvbit.co/public/index.html",
+    "UploadUrl": "/apidata",
+    "UploadPath": "/home/nikita/work/supertvbit/public/public/api/apidata",
+    "ReservationTimeout": 300,
+    "BaseUrl": "http://public.tvbit.co/",
+    "ExternalServerAddress": "go.tvbit.co:8285",
+    "SSLCertFile": "/etc/nginx/ssl/tvbit.co.crt",
+    "SSLKeyFile": "/etc/nginx/ssl/tvbit.co.key",
+    "WebSocketURL": "ws://go.tvbit.co:8285/ws",
+    "SecureWebSocketURL": "wss://go.tvbit.co:8286/ws",
+    "ApiURL": "http://go.tvbit.co:8285/api",
+    "SecureApiURL": "https://go.tvbit.co:8286/api",
+    "AccountApiKeys": {
+      "yandex": "18adaa44-ee1f-4cb0-9558-c14308618f2b",
+      "yandex_enterprise": "",
+      "openweathermap": "e2731a49d873da84b894d1d5bfc621e6"
+    },
+    "AdminLoginUrl": "https://public.tvbit.co/admin/login"
+  },
+  "MasterUrl": "https://master.tvbit.co/",
+  "AccountKeysDir": "keys",
+  "PathToFfmpeg": "./ffmpeg",
+  "LogPath": "logs"
+}
