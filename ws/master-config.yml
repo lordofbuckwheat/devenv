@@ -1,0 +1,39 @@
+service_disabled:   false
+crypto_key:         "I29WQM5iOncE1wAjR8all2oCAFvFNgnHBQOT8WEjD5Sc6esAJ141CyXz02KR7xPR"
+master_key:         "ko5V38Mmh5mXP62pHvnLMYioUBJkGDiX5J1ju9YYuohIMnhZROqiCECXpYzmna4S"
+user_password_salt: "KH#Jj%ke!_h378yhksd230j;"
+
+database:
+  main:
+    driver:     "mysql"
+    host:       "mysql"
+    port:       3306
+    dbname:     "master"
+    user:       "root"
+    password:   "root"
+    charset:    UTF8
+
+mts:
+  server_license_id:      1
+  product_code:           ""
+  price_codes:
+    - "code_1"
+  admin_url:              ""
+  support_email:          ""
+  crypto_key:             ""
+
+  b2b_cert_file:          ""
+  b2b_issuer:             ""
+  b2b_login_url:          ""
+  b2b_logout_url:         ""
+
+  account_region_id:      1
+  account_country_id:     1
+  account_distributor_id: 1
+
+unisender:
+  api_key:            ""
+  username:           ""
+
+support_email:          ""
+support_email_name:     ""
