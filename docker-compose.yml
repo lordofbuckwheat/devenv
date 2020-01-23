@@ -1,7 +1,41 @@
-version: 3.7
+version: '3.7'
 services:
   ws:
-    build: ws
+    build: ./ws
     volumes:
       - ./config:/root/config
-      - ./src:/root/src
+      - ./app:/root/app
+    stdin_open: true
+    tty: true
+    container_name: ws
+  mysql:
+    build: mysql
+    volumes:
+      - ./app/supertvbit/master/migrations:/mysql/migrations
+      - mysql:/var/lib/mysql
+    ports:
+      - 13306:3306
+    container_name: mysql
+  php:
+    build: php
+    volumes:
+      - ./app/supertvbit/master/php:/root/web/master
+    container_name: php
+  web:
+    build: ./web
+    ports:
+      - 10080:80
+      - 10443:443
+    networks:
+      default:
+        aliases:
+          - public.tvbit.co
+          - master.tvbit.co
+    volumes:
+      - ./config/ssl:/etc/nginx/ssl
+      - ./app/supertvbit/public/public:/root/web/public
+      - ./app/supertvbit/public/panel-build:/root/web/panel-build
+      - ./app/supertvbit/master/php:/root/web/master
+    container_name: web
+volumes:
+  mysql:
