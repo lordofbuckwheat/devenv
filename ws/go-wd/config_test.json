@@ -1,6 +1,6 @@
 {
   "Db": {
-    "ConnectString": "root:root@tcp(mysql:3306)/tvbit",
+    "ConnectString": "root:root@tcp(mysql:3306)/tvbit_test",
     "PathToMysqlDump": "mysqldump"
   },
   "ClickHouseDB": {

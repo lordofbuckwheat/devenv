@@ -26,8 +26,10 @@ if [ ! -d app/supertvbit ]; then
   cd panel
   npm i
   npm run prod
-  #cd /root/app/supertvbit
-  #./scripts/deploy.sh --hostname=https://master.tvbit.co
+  cd /root/waitforit
+  go run main.go
+  cd /root/app/supertvbit
+  ./scripts/deploy.sh --hostname=https://master.tvbit.co --silent
 fi
-cd /root
+cd /root/app
 zsh

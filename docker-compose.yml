@@ -8,6 +8,8 @@ services:
     stdin_open: true
     tty: true
     container_name: ws
+    extra_hosts:
+      - go.tvbit.co:127.0.0.1
   mysql:
     build: mysql
     volumes:
