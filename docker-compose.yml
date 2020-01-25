@@ -11,7 +11,7 @@ services:
   mysql:
     build: mysql
     volumes:
-      - ./app/supertvbit/master/migrations:/mysql/migrations
+      - ./app:/mysql/app
       - mysql:/var/lib/mysql
     ports:
       - 13306:3306
@@ -19,7 +19,7 @@ services:
   php:
     build: php
     volumes:
-      - ./app/supertvbit/master/php:/root/web/master
+      - ./app:/root/app
     container_name: php
   web:
     build: ./web
@@ -33,9 +33,7 @@ services:
           - master.tvbit.co
     volumes:
       - ./config/ssl:/etc/nginx/ssl
-      - ./app/supertvbit/public/public:/root/web/public
-      - ./app/supertvbit/public/panel-build:/root/web/panel-build
-      - ./app/supertvbit/master/php:/root/web/master
+      - ./app:/root/app
     container_name: web
 volumes:
   mysql:
