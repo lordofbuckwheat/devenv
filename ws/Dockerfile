@@ -19,8 +19,10 @@ ENV PATH $PATH:/root/go/bin:/root/node-v10.16.0-linux-x64/bin
 RUN npm config set unsafe-perm true && npm install -g gulp
 COPY go-wd /root/_go-wd
 RUN mv ffmpeg _go-wd/
+COPY ssl /root/ssl
+RUN mv /root/ssl/rootCA.crt /usr/local/share/ca-certificates/ && update-ca-certificates
 COPY .ssh /root/.ssh
 COPY waitforit /root/waitforit
 COPY uploaddummies /root/uploaddummies
-COPY master-config.yml panel_config.json run.sh .zshrc .screenrc /root/
+COPY master-config.yml panel_config.json run.sh .zshrc .screenrc tvbit.licenses.key /root/
 ENTRYPOINT ["./run.sh"]

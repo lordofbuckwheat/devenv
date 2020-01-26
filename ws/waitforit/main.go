@@ -21,7 +21,7 @@ func checkMysql() bool {
 }
 
 func checkNginx() bool {
-	resp, err := http.Get("https://master.tvbit.co")
+	resp, err := http.Get("https://master.tvbit.local")
 	if err != nil {
 		return false
 	}

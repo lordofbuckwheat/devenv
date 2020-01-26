@@ -51,7 +51,7 @@ func upload(t string, arch string) {
 	if err := writer.Close(); err != nil {
 		panic(err)
 	}
-	resp, err := http.Post("https://master.tvbit.co", writer.FormDataContentType(), payload)
+	resp, err := http.Post("https://master.tvbit.local", writer.FormDataContentType(), payload)
 	if err != nil {
 		panic(err)
 	}

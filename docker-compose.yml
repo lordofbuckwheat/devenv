@@ -17,12 +17,12 @@ services:
     tty: true
     container_name: ws
     extra_hosts:
-      - go.tvbit.co:0.0.0.0
+      - go.tvbit.local:0.0.0.0
       - license.tvbit.co:1.2.3.4
     networks:
       default:
         aliases:
-          - go.tvbit.co
+          - go.tvbit.local
   mysql:
     build: mysql
     volumes:
@@ -44,10 +44,9 @@ services:
     networks:
       default:
         aliases:
-          - public.tvbit.co
-          - master.tvbit.co
+          - public.tvbit.local
+          - master.tvbit.local
     volumes:
-      - ./config/ssl:/etc/nginx/ssl
       - ./app:/root/app
     container_name: web
   clickhouse:

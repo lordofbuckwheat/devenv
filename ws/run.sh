@@ -19,6 +19,7 @@ if [ ! -d app/supertvbit ]; then
   cd php
   composer install
   mv /root/master-config.yml config/config.yml
+  mv /root/tvbit.licenses.key ./
   cd /root/app/supertvbit/gopath/src/gitlab.tvbit.co/g/server-go
   git checkout master --
   cd /root/app/supertvbit/public
@@ -31,7 +32,7 @@ if [ ! -d app/supertvbit ]; then
   cd /root/uploaddummies
   go run main.go
   cd /root/app/supertvbit
-  ./scripts/deploy.sh --hostname=https://master.tvbit.co --silent
+  ./scripts/deploy.sh --hostname=https://master.tvbit.local --silent
 fi
 rsync -va /root/_go-wd/ /root/go-wd
 cd /root/app
