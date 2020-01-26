@@ -1,0 +1,14 @@
+{
+  "SITE_URL": "http://public.tvbit.co:10080/",
+  "PUBLIC_HOST": "http://public.tvbit.co:10080/",
+  "API_URL": "http://go.tvbit.co:18285/",
+  "WEBSOCKET_URL": "ws://go.tvbit.co:18285/ws",
+  "WEBSOCKET_ADMIN_URL": "ws://go.tvbit.co:18285/ws-admin",
+
+  "SECURE_PUBLIC_HOST": "https://public.tvbit.co:10443/",
+  "SECURE_API_URL": "https://go.tvbit.co:18286/",
+  "SECURE_WEBSOCKET_URL": "wss://go.tvbit.co:18286/ws",
+  "SECURE_WEBSOCKET_ADMIN_URL": "wss://go.tvbit.co:18286/ws-admin",
+  "DOCS_URL": "docs",
+  "PANEL_FEATURES": []
+}
