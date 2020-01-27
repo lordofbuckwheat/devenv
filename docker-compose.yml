@@ -48,6 +48,7 @@ services:
           - master.tvbit.local
     volumes:
       - ./app:/root/app
+      - ./go-wd:/root/go-wd
     container_name: web
   clickhouse:
     build: ./clickhouse
