@@ -1,7 +1,7 @@
 #!/bin/bash
 set -euo pipefail
-./scripts/drop-database.sh tvbit
-./scripts/drop-database.sh tvbit_test
+./drop-database.sh tvbit
+./drop-database.sh tvbit_test
 rm -rf /root/app/supertvbit/public/public/api/apidata/1
 rm -rf /root/app/supertvbit/public/public/api/apidata/2
 rm -rf /root/app/supertvbit/public/public/api/apidata/3
