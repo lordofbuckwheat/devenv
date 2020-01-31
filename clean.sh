@@ -1,5 +1,5 @@
 #!/bin/bash
-set -euo pipefail
+set -eo pipefail
 docker-compose down
 sudo rm -rf app/supertvbit go-wd
 docker volume rm devenv_mysql || true
