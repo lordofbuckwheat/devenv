@@ -29,8 +29,6 @@ if [ ! -d app/supertvbit ]; then
   mv /root/panel_config.json src/
   cd /root/waitforit
   go run main.go
-  cd /root/uploaddummies
-  go run main.go
   cd /root/app/supertvbit
   ./scripts/deploy.sh --hostname=https://master.tvbit.local --silent
 fi
