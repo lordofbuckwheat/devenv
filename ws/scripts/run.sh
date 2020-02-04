@@ -14,6 +14,7 @@ checkout() {
       echo $repo checked out to develop
     fi
   fi
+  git pull
 }
 if [[ ! -z ${branch} ]]; then
   ./drop-client.sh
