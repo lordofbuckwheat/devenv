@@ -1,8 +1,21 @@
 #!/bin/bash
 set -eo pipefail
-branch=$1
+branch=
+redirect=
+while [[ -n $1 ]]; do
+  case "$1" in
+  -r | --redirect)
+    redirect=true
+    shift
+    ;;
+  *)
+    branch=$1
+    shift
+    ;;
+  esac
+done
 checkout() {
-  repo=$(basename $(pwd))
+  repo=$(basename "$(pwd)")
   if git checkout ${branch} --; then
     echo $repo checked out to $branch
   else
@@ -31,4 +44,9 @@ fi
 cd /root/app/supertvbit/gopath/src/gitlab.tvbit.co/g/server-go
 go build -i -race -o /root/go-wd/server-go main.go
 cd /root/go-wd
-./server-go --secret=ko5V38Mmh5mXP62pHvnLMYioUBJkGDiX5J1ju9YYuohIMnhZROqiCECXpYzmna4S
+if [[ -n $redirect ]]; then
+  echo redirecting to /root/go-wd/out.log
+  ./server-go --secret=ko5V38Mmh5mXP62pHvnLMYioUBJkGDiX5J1ju9YYuohIMnhZROqiCECXpYzmna4S > /root/go-wd/out.log 2>&1
+else
+  ./server-go --secret=ko5V38Mmh5mXP62pHvnLMYioUBJkGDiX5J1ju9YYuohIMnhZROqiCECXpYzmna4S
+fi
