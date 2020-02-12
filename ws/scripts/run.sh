@@ -42,6 +42,9 @@ if [[ ! -z ${branch} ]]; then
   cd panel
   npm i
   npm run prod
+  cd /root/app/supertvbit/gopath/src/scripts
+  git stash
+  checkout
   cd /root/app/supertvbit/gopath/src/gitlab.tvbit.co/g/server-go
   git stash
   checkout
