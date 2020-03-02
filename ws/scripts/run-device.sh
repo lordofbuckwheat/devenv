@@ -1,11 +1,16 @@
 #!/bin/bash
 set -eo pipefail
 redirect=
+race=
 allParams=()
 while [[ -n $1 ]]; do
   case "$1" in
   -r | --redirect)
     redirect=true
+    shift
+    ;;
+  --race)
+    race=true
     shift
     ;;
   *)
@@ -15,7 +20,11 @@ while [[ -n $1 ]]; do
   esac
 done
 cd /root/app/supertvbit/gopath/src/scripts/clientemulator/device
-go build -o /root/go-wd/device .
+if [[ -n $race ]]; then
+  go build -o --race /root/go-wd/device .
+else
+  go build -o /root/go-wd/device .
+fi
 cd /root/go-wd
 if [[ -n $redirect ]]; then
   echo redirecting to /root/go-wd/out-device.log
