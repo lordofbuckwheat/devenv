@@ -21,7 +21,7 @@ while [[ -n $1 ]]; do
 done
 cd /root/app/supertvbit/gopath/src/scripts/clientemulator/device
 if [[ -n $race ]]; then
-  go build -o --race /root/go-wd/device .
+  go build --race -o /root/go-wd/device .
 else
   go build -o /root/go-wd/device .
 fi
