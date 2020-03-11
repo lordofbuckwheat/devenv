@@ -1,0 +1,17 @@
+version: '3.7'
+services:
+  go:
+    build: .
+    volumes:
+      - ../app:/app
+      - go_modules:/go/pkg/mod
+      - ../go-wd:/go-wd
+    stdin_open: true
+    tty: true
+    container_name: go
+volumes:
+  go_modules:
+networks:
+  default:
+    external:
+      name: devenv_default
