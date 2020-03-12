@@ -1,5 +1,7 @@
 #!/bin/bash
 set -eo pipefail
+subcommand=$1
+shift
 redirect=
 race=
 allParams=()
@@ -19,16 +21,16 @@ while [[ -n $1 ]]; do
     ;;
   esac
 done
-cd /root/app/supertvbit/gopath/src/scripts/clientemulator/device
+cd /root/app/supertvbit/gopath/src/scripts/clientemulator
 if [[ -n $race ]]; then
-  go build --race -o /root/go-wd/device .
+  go build --race -o /root/go-wd/client .
 else
-  go build -o /root/go-wd/device .
+  go build -o /root/go-wd/client .
 fi
 cd /root/go-wd
 if [[ -n $redirect ]]; then
-  echo redirecting to /root/go-wd/out-device.log
-  ./device "${allParams[@]}" >/root/go-wd/out-device.log 2>&1
+  echo redirecting to /root/go-wd/out-client.log
+  ./client "$subcommand" "${allParams[@]}" >/root/go-wd/out-client.log 2>&1
 else
-  ./device "${allParams[@]}"
+  ./client "$subcommand" "${allParams[@]}"
 fi
