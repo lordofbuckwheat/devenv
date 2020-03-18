@@ -1,7 +1,7 @@
 FROM debian:10
 SHELL ["/bin/bash", "-c"]
 WORKDIR /root
-RUN apt-get -y update && apt-get -y install openssh-client git zsh gcc wget xz-utils locales nano curl unzip php7.3 php7.3-curl php7.3-dom php7.3-dev libmcrypt-dev php-pear zip unzip aptitude default-mysql-client clickhouse-client screen rsync imagemagick && apt-get clean
+RUN apt-get -y update && apt-get -y install openssh-client git zsh gcc wget xz-utils locales nano curl unzip php7.3 php7.3-curl php7.3-dom php7.3-dev libmcrypt-dev php-pear zip unzip aptitude default-mysql-client clickhouse-client screen rsync imagemagick cpulimit htop && apt-get clean
 RUN wget -O node.tar.xz https://nodejs.org/dist/v10.16.0/node-v10.16.0-linux-x64.tar.xz && tar -xf node.tar.xz && rm node.tar.xz
 RUN wget -O ffmpeg.zip https://github.com/vot/ffbinaries-prebuilt/releases/download/v4.2.1/ffmpeg-4.2.1-linux-64.zip && unzip ffmpeg.zip && rm ffmpeg.zip && rm -r __MACOSX
 RUN wget -O go.tar.gz -- https://dl.google.com/go/go1.13.5.linux-amd64.tar.gz && tar -xf go.tar.gz && rm go.tar.gz && mkdir gopath
