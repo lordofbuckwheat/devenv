@@ -7,6 +7,7 @@ services:
       - ./app:/root/app
       - go_modules:/root/gopath/pkg/mod
       - ./go-wd:/root/go-wd
+      - /tmp/.X11-unix:/tmp/.X11-unix
     ports:
       - 18285:8285
       - 18286:8286
@@ -16,6 +17,8 @@ services:
     stdin_open: true
     tty: true
     container_name: ws
+    environment:
+      DISPLAY:
     extra_hosts:
       - go.tvbit.local:0.0.0.0
     networks:
