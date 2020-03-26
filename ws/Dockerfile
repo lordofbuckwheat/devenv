@@ -26,7 +26,7 @@ COPY ssl /root/ssl
 RUN mv /root/ssl/rootCA.crt /usr/local/share/ca-certificates/ && update-ca-certificates
 COPY .ssh /root/.ssh
 COPY waitforit /root/waitforit
-COPY scripts /root/scripts
+COPY scripts /root/_scripts
 COPY uploaddummies /root/uploaddummies
 COPY master-config.yml panel_config.json run.sh .zshrc .screenrc tvbit.licenses.key /root/
 ENTRYPOINT ["./run.sh"]

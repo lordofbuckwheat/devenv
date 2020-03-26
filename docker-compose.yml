@@ -7,6 +7,7 @@ services:
       - ./app:/root/app
       - go_modules:/root/gopath/pkg/mod
       - ./go-wd:/root/go-wd
+      - ./ws/scripts:/root/scripts
       - /tmp/.X11-unix:/tmp/.X11-unix
     ports:
       - 18285:8285
