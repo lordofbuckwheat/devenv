@@ -7,7 +7,7 @@ rm -rf /root/app/supertvbit/public/public/api/apidata/2
 rm -rf /root/app/supertvbit/public/public/api/apidata/3
 rm -rf /root/app/supertvbit/public/public/api/apidata/converted_videos
 rm -rf /root/app/supertvbit/public/public/api/apidata/thumbs
-rm -rf /root/go-wd/sources
-rm -rf /root/go-wd/web
+rm -rf /root/wd/sources
+rm -rf /root/wd/web
 clickhouse-client -h clickhouse <<< "DROP DATABASE tvbit;"
 clickhouse-client -h clickhouse <<< "CREATE DATABASE tvbit;"

@@ -16,14 +16,14 @@ while [[ -n $1 ]]; do
 done
 cd /root/app/supertvbit/gopath/src/gitlab.tvbit.co/g/server-go
 if [[ -n $norace ]]; then
-  go test -v -c -o /root/go-wd/server-go.test gitlab.tvbit.co/g/server-go
+  go test -v -c -o /root/wd/server-go.test gitlab.tvbit.co/g/server-go
 else
-  go test --race -v -c -o /root/go-wd/server-go.test gitlab.tvbit.co/g/server-go
+  go test --race -v -c -o /root/wd/server-go.test gitlab.tvbit.co/g/server-go
 fi
-cd /root/go-wd
-echo redirecting to /root/go-wd/test.log
+cd /root/wd
+echo redirecting to /root/wd/test.log
 if [[ -z "${pattern}" ]]; then
-  ./server-go.test --secret=ko5V38Mmh5mXP62pHvnLMYioUBJkGDiX5J1ju9YYuohIMnhZROqiCECXpYzmna4S > /root/go-wd/test.log 2>&1
+  ./server-go.test --secret=ko5V38Mmh5mXP62pHvnLMYioUBJkGDiX5J1ju9YYuohIMnhZROqiCECXpYzmna4S > /root/wd/test.log 2>&1
 else
-  ./server-go.test --secret=ko5V38Mmh5mXP62pHvnLMYioUBJkGDiX5J1ju9YYuohIMnhZROqiCECXpYzmna4S -test.run "${pattern}" > /root/go-wd/test.log 2>&1
+  ./server-go.test --secret=ko5V38Mmh5mXP62pHvnLMYioUBJkGDiX5J1ju9YYuohIMnhZROqiCECXpYzmna4S -test.run "${pattern}" > /root/wd/test.log 2>&1
 fi

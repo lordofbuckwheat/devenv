@@ -51,14 +51,14 @@ if [[ ! -z ${branch} ]]; then
 fi
 cd /root/app/supertvbit/gopath/src/gitlab.tvbit.co/g/server-go
 if [[ -n $norace ]]; then
-  go build -o /root/go-wd/server-go main.go
+  go build -o /root/wd/server-go main.go
 else
-  go build -race -o /root/go-wd/server-go main.go
+  go build -race -o /root/wd/server-go main.go
 fi
-cd /root/go-wd
+cd /root/wd
 if [[ -n $redirect ]]; then
-  echo redirecting to /root/go-wd/out.log
-  ./server-go --secret=ko5V38Mmh5mXP62pHvnLMYioUBJkGDiX5J1ju9YYuohIMnhZROqiCECXpYzmna4S > /root/go-wd/out.log 2>&1
+  echo redirecting to /root/wd/out.log
+  ./server-go --secret=ko5V38Mmh5mXP62pHvnLMYioUBJkGDiX5J1ju9YYuohIMnhZROqiCECXpYzmna4S > /root/wd/out.log 2>&1
 else
   ./server-go --secret=ko5V38Mmh5mXP62pHvnLMYioUBJkGDiX5J1ju9YYuohIMnhZROqiCECXpYzmna4S
 fi

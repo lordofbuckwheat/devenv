@@ -6,9 +6,15 @@ services:
       - ./config:/root/config
       - ./app:/root/app
       - go_modules:/root/gopath/pkg/mod
-      - ./go-wd:/root/go-wd
+      - ./wd:/root/wd
       - ./ws/scripts:/root/scripts
       - /tmp/.X11-unix:/tmp/.X11-unix
+      - goland:/root/.GoLand2019.3
+      - pycharm:/root/.PyCharm2019.3
+      - java_config:/root/.java
+      - pipenv_packages:/root/.local/share/virtualenvs
+      - pip_packages:/usr/local/lib/python3.8/site-packages
+      - java_hsperfdata:/tmp/hsperfdata_root
     ports:
       - 18285:8285
       - 18286:8286
@@ -51,7 +57,7 @@ services:
           - master.tvbit.local
     volumes:
       - ./app:/root/app
-      - ./go-wd:/root/go-wd
+      - ./wd:/root/wd
     container_name: web
   clickhouse:
     build: ./clickhouse
@@ -65,3 +71,9 @@ volumes:
   mysql:
   go_modules:
   clickhouse:
+  goland:
+  pycharm:
+  java_config:
+  java_hsperfdata:
+  pipenv_packages:
+  pip_packages:

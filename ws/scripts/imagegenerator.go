@@ -16,7 +16,7 @@ type Size struct {
 }
 
 func download(size Size, color color.RGBA) {
-	var fileName = fmt.Sprintf("/root/go-wd/images/%04dx%04d.jpg", size.Width, size.Height)
+	var fileName = fmt.Sprintf("/root/wd/images/%04dx%04d.jpg", size.Width, size.Height)
 	if _, err := os.Stat(fileName); err != nil && !os.IsNotExist(err) {
 		panic(err)
 	} else if err == nil {
@@ -47,7 +47,7 @@ func randomColor() color.RGBA {
 }
 
 func main() {
-	if err := os.MkdirAll("/root/go-wd/images", os.ModePerm); err != nil {
+	if err := os.MkdirAll("/root/wd/images", os.ModePerm); err != nil {
 		panic(err)
 	}
 	var sizes = []Size{
