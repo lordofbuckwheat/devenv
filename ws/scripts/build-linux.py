@@ -18,13 +18,14 @@ if args.electron:
     subprocess.run(['npm', 'run', 'dist'], check=True)
     shutil.rmtree('/root/wd/electron-dist', ignore_errors=True)
     shutil.move('dist/linux-unpacked', '/root/wd/electron-dist')
-    shutil.move('dist/linux-unpacked', '/root/wd/electron-dist')
+
 os.chdir('/root/app/linux-client')
 go_build = ['go', 'build', '-o', '/root/wd/linux-client', '.']
 if args.race:
     go_build.insert(2, '--race')
 print(go_build)
 subprocess.run(go_build, check=True)
+
 os.chdir('/root/wd')
 with open('run-linux-client.sh', 'w') as f:
     f.write('\n'.join([
