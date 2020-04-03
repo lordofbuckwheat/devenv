@@ -31,13 +31,13 @@ with open('run-linux-client.sh', 'w') as f:
     f.write('\n'.join([
         '#!/bin/bash',
         'set -eo pipefail',
-        f"./linux-client start --server_url='{args.server_url}' --account_key='{args.account_key}' --title='{args.title}' --uuid='{args.uuid}'",
+        f"./linux-client start --server_url='{args.server_url}' --account_key='{args.account_key}' --title='{args.title}' --uuid='{args.uuid}' --electron_path='electron-dist/ui'",
     ]))
 os.chmod('run-linux-client.sh', 0o755)
 with open('install-linux-client.sh', 'w') as f:
     f.write('\n'.join([
         '#!/bin/bash',
         'set -eo pipefail',
-        f"./linux-client install --server_url='{args.server_url}' --account_key='{args.account_key}' --title='{args.title}'",
+        f"./linux-client install --server_url='{args.server_url}' --account_key='{args.account_key}' --title='{args.title}' --electron_path='electron-dist/ui'",
     ]))
 os.chmod('install-linux-client.sh', 0o755)
