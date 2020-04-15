@@ -4,23 +4,26 @@ services:
     build: ./ws
     volumes:
       - ./config:/root/config
+      - ./bin:/root/bin
       - ./app:/root/app
       - go_modules:/root/gopath/pkg/mod
       - ./wd:/root/wd
-      - ./ws/scripts:/root/scripts
+      - ./scripts:/root/scripts
       - /tmp/.X11-unix:/tmp/.X11-unix
-      - goland:/root/.GoLand2019.3
-      - pycharm:/root/.PyCharm2019.3
+      - jetbrains_config:/root/.config/JetBrains
       - java_config:/root/.java
-      - pipenv_packages:/root/.local/share/virtualenvs
+      - local:/root/.local
       - pip_packages:/usr/local/lib/python3.8/site-packages
       - java_hsperfdata:/tmp/hsperfdata_root
+      - watson:/root/.config/watson
+      - projects:/root/projects
     ports:
       - 18285:8285
       - 18286:8286
       - 18385:8385
       - 18386:8386
       - 14200:4200
+      - 18000:8000
     stdin_open: true
     tty: true
     container_name: ws
@@ -71,9 +74,10 @@ volumes:
   mysql:
   go_modules:
   clickhouse:
-  goland:
-  pycharm:
+  jetbrains_config:
   java_config:
   java_hsperfdata:
-  pipenv_packages:
+  local:
   pip_packages:
+  watson:
+  projects:

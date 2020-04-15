@@ -33,6 +33,5 @@ if [ ! -d app/supertvbit ]; then
   ./scripts/deploy.sh --hostname=https://master.tvbit.local --silent
 fi
 rsync -va /root/_wd/ /root/wd
-rsync -va /root/_scripts/ /root/scripts
 cd /root/app
 zsh
