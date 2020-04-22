@@ -58,6 +58,7 @@ services:
         aliases:
           - public.tvbit.local
           - master.tvbit.local
+          - admin.tvbit.local
     volumes:
       - ./app:/root/app
       - ./wd:/root/wd
