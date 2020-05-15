@@ -2,11 +2,6 @@
 set -eo pipefail
 ./drop-database.sh tvbit
 ./drop-database.sh tvbit_test
-rm -rf /root/app/supertvbit/public/public/api/apidata/1
-rm -rf /root/app/supertvbit/public/public/api/apidata/2
-rm -rf /root/app/supertvbit/public/public/api/apidata/3
-rm -rf /root/app/supertvbit/public/public/api/apidata/converted_videos
-rm -rf /root/app/supertvbit/public/public/api/apidata/thumbs
 rm -rf /root/wd/sources
 rm -rf /root/wd/web
 clickhouse-client -h clickhouse <<< "DROP DATABASE tvbit;"

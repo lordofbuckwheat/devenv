@@ -5,7 +5,7 @@ import subprocess
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--norace', dest='race', action='store_false')
-parser.add_argument('--server_url', dest='server_url', default='https://go.tvbit.local:18286')
+parser.add_argument('--server_url', dest='server_url', default='http://go.tvbit.local:18285')
 parser.add_argument('--uuid', dest='uuid', default='linux-dummy')
 parser.add_argument('--title', dest='title', default='linux-dummy-device')
 parser.add_argument('--account_key', dest='account_key',
@@ -33,10 +33,8 @@ with open('run-linux-client.sh', 'w') as f:
         f"./tvbit-client start --server_url='{args.server_url}' --account_key='{args.account_key}' --title='{args.title}' --uuid='{args.uuid}' --electron_path='electron-dist/ui' --dev",
     ]))
 os.chmod('run-linux-client.sh', 0o755)
-with open('install-linux-client.sh', 'w') as f:
+with open('organization.key', 'w') as f:
     f.write('\n'.join([
-        '#!/bin/bash',
-        'set -eo pipefail',
-        f"./tvbit-client install --server_url='{args.server_url}' --account_key='{args.account_key}' --title='{args.title}' --electron_path='electron-dist/ui' --dev",
+        args.account_key,
+        args.server_url,
     ]))
-os.chmod('install-linux-client.sh', 0o755)

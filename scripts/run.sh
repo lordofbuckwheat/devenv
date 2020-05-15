@@ -2,15 +2,10 @@
 set -eo pipefail
 branch=
 redirect=
-norace=
 while [[ -n $1 ]]; do
   case "$1" in
   -r | --redirect)
     redirect=true
-    shift
-    ;;
-  -nr | --norace)
-    norace=true
     shift
     ;;
   *)
@@ -50,11 +45,7 @@ if [[ ! -z ${branch} ]]; then
   checkout
 fi
 cd /root/app/supertvbit/gopath/src/gitlab.tvbit.co/g/server-go
-if [[ -n $norace ]]; then
-  go build -o /root/wd/server-go main.go
-else
-  go build -race -o /root/wd/server-go main.go
-fi
+go build -o /root/wd/server-go main.go
 cd /root/wd
 if [[ -n $redirect ]]; then
   echo redirecting to /root/wd/out.log

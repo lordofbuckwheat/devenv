@@ -102,5 +102,5 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias gc='git reset . && git checkout . && git clean -df && git checkout HEAD'
-
+alias space="sed -u 's/^/    /'"
 unsetopt share_history

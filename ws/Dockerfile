@@ -8,6 +8,7 @@ RUN wget -O node.tar.xz https://nodejs.org/dist/v10.16.0/node-v10.16.0-linux-x64
 RUN wget -O ffmpeg.zip https://github.com/vot/ffbinaries-prebuilt/releases/download/v4.2.1/ffmpeg-4.2.1-linux-64.zip && unzip ffmpeg.zip && rm ffmpeg.zip && rm -r __MACOSX
 RUN wget -O go.tar.gz -- https://dl.google.com/go/go1.14.1.linux-amd64.tar.gz && tar -xf go.tar.gz && rm go.tar.gz && mkdir gopath
 RUN wget -O python.tar.gz https://www.python.org/ftp/python/3.8.2/Python-3.8.2.tar.xz && tar -xf python.tar.gz && rm python.tar.gz && cd Python-3.8.2 && ./configure --enable-optimizations && make install && cd ../ && rm -r Python-3.8.2
+RUN wget -O lnav.deb https://github.com/tstack/lnav/releases/download/v0.8.5/lnav_0.8.5_amd64.deb && dpkg -i lnav.deb && rm lnav.deb
 RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 RUN sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen && locale-gen
 ENV LANG en_US.UTF-8

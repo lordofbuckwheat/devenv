@@ -26,12 +26,13 @@ if [ ! -d app/supertvbit ]; then
   git checkout master --
   cd panel
   npm i
-  mv /root/panel_config.json src/
+  cp /root/panel_config.json src/
   cd /root/waitforit
   go run main.go
   cd /root/app/supertvbit
   ./scripts/deploy.sh --hostname=https://master.tvbit.local --silent
 fi
+cp /root/panel_config.json /root/app/supertvbit/public/panel/src/
 rsync -va /root/_wd/ /root/wd
 cd /root/app
 zsh
