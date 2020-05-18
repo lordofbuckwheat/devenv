@@ -17,6 +17,7 @@ services:
       - java_hsperfdata:/tmp/hsperfdata_root
       - watson:/root/.config/watson
       - projects:/root/projects
+      - cache:/root/.cache
     ports:
       - 18285:8285
       - 18215:8215
@@ -94,3 +95,4 @@ volumes:
   pip_packages:
   watson:
   projects:
+  cache:
