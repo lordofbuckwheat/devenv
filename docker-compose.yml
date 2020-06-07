@@ -10,12 +10,11 @@ services:
       - ./wd:/root/wd
       - ./scripts:/root/scripts
       - /tmp/.X11-unix:/tmp/.X11-unix
-      - jetbrains_config:/root/.config/JetBrains
       - java_config:/root/.java
       - local:/root/.local
       - pip_packages:/usr/local/lib/python3.8/site-packages
       - java_hsperfdata:/tmp/hsperfdata_root
-      - watson:/root/.config/watson
+      - config:/root/.config
       - projects:/root/projects
       - cache:/root/.cache
     ports:
@@ -88,11 +87,10 @@ volumes:
   mysql:
   go_modules:
   clickhouse:
-  jetbrains_config:
   java_config:
   java_hsperfdata:
   local:
   pip_packages:
-  watson:
   projects:
   cache:
+  config:

@@ -30,8 +30,8 @@
     "SSLKeyFile": "/root/ssl/server.key",
     "WebSocketURL": "ws://go.tvbit.local:18285/ws",
     "SecureWebSocketURL": "wss://go.tvbit.local:18286/ws",
-    "ApiURL": "http://go.tvbit.local:18285/api",
-    "SecureApiURL": "https://go.tvbit.local:18286/api",
+    "ApiURL": "http://go.tvbit.local:18285",
+    "SecureApiURL": "https://go.tvbit.local:18286",
     "AccountApiKeys": {
       "yandex": "18adaa44-ee1f-4cb0-9558-c14308618f2b",
       "yandex_enterprise": "",

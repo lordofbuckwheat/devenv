@@ -31,7 +31,7 @@
     "WebSocketURL": "ws://go.tvbit.local:8285/ws",
     "SecureWebSocketURL": "wss://go.tvbit.local:8286/ws",
     "ApiURL": "http://go.tvbit.local:8285/api",
-    "SecureApiURL": "https://go.tvbit.local:8286/api",
+    "SecureApiURL": "https://go.tvbit.local:8286",
     "AccountApiKeys": {
       "yandex": "18adaa44-ee1f-4cb0-9558-c14308618f2b",
       "yandex_enterprise": "",
