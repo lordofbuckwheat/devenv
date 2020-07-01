@@ -39,6 +39,12 @@
     },
     "AdminLoginUrl": "https://public.tvbit.local/admin/login"
   },
+  "SMTP": {
+    "Host": "smtp.yandex.ru",
+    "Port": 465,
+    "From": "noreply@tvbit.co",
+    "Password": "xSVMr7WHpszf7DWs"
+  },
   "MasterUrl": "https://master.tvbit.local/",
   "AccountKeysDir": "keys",
   "PathToFfmpeg": "./ffmpeg",
