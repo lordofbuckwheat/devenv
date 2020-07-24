@@ -19,8 +19,8 @@
   "Api": {
     "ServerAddress": "go.tvbit.local:8285",
     "ServerAddressSSL": "go.tvbit.local:8286",
-    "IndexPageUrl": "http://public.tvbit.local/public/index.html",
-    "SecureIndexPageURL": "https://public.tvbit.local/public/index.html",
+    "IndexPageUrl": "http://public.tvbit.local:10080/public/index.html",
+    "SecureIndexPageURL": "https://public.tvbit.local:10443/public/index.html",
     "UploadUrl": "/apidata",
     "UploadPath": "/root/wd/web/public/apidata",
     "ReservationTimeout": 300,
