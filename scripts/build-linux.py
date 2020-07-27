@@ -5,7 +5,7 @@ import subprocess
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--norace', dest='race', action='store_false')
-parser.add_argument('--server_url', dest='server_url', default='http://go.tvbit.local:18285')
+parser.add_argument('--server_url', dest='server_url', default='http://go.tvbit.local:8285')
 parser.add_argument('--uuid', dest='uuid', default='linux-dummy')
 parser.add_argument('--title', dest='title', default='linux-dummy-device')
 parser.add_argument('--account_key', dest='account_key',

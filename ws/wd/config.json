@@ -1,18 +1,18 @@
 {
   "Db": {
-    "ConnectString": "root:root@tcp(mysql:3306)/tvbit",
+    "ConnectString": "root:root@tcp(localhost:13306)/tvbit",
     "PathToMysqlDump": "mysqldump"
   },
   "ClickHouseDB": {
-    "ConnectString": "tcp://clickhouse:9000?username=default&password=&database=tvbit"
+    "ConnectString": "tcp://localhost:19000?username=default&password=&database=tvbit"
   },
   "StatisticsApi": {
     "ServerAddress": "go.tvbit.local:8385",
     "ServerAddressSSL": "go.tvbit.local:8386",
-    "ExternalServerAddress": "http://go.tvbit.local:18385",
-    "ExternalServerAddressSSL": "https://go.tvbit.local:18386",
-    "SSLCertFile": "/root/ssl/server.crt",
-    "SSLKeyFile": "/root/ssl/server.key",
+    "ExternalServerAddress": "http://go.tvbit.local:8385",
+    "ExternalServerAddressSSL": "https://go.tvbit.local:8386",
+    "SSLCertFile": "/home/nikita/ssl/server.crt",
+    "SSLKeyFile": "/home/nikita/ssl/server.key",
     "AggregationInterval": 300,
     "PrimaryDataLifetime": 7
   },
@@ -22,12 +22,12 @@
     "IndexPageUrl": "http://public.tvbit.local:10080/public/index.html",
     "SecureIndexPageURL": "https://public.tvbit.local:10443/public/index.html",
     "UploadUrl": "/apidata",
-    "UploadPath": "/root/wd/web/public/apidata",
+    "UploadPath": "/home/nikita/devenv/wd/web/public/apidata",
     "ReservationTimeout": 300,
     "BaseUrl": "http://public.tvbit.local/",
     "ExternalServerAddress": "go.tvbit.local:8285",
-    "SSLCertFile": "/root/ssl/server.crt",
-    "SSLKeyFile": "/root/ssl/server.key",
+    "SSLCertFile": "/home/nikita/ssl/server.crt",
+    "SSLKeyFile": "/home/nikita/ssl/server.key",
     "WebSocketURL": "ws://go.tvbit.local:8285/ws",
     "SecureWebSocketURL": "wss://go.tvbit.local:8286/ws",
     "ApiURL": "http://go.tvbit.local:8285/api",
@@ -37,7 +37,7 @@
       "yandex_enterprise": "",
       "openweathermap": "e2731a49d873da84b894d1d5bfc621e6"
     },
-    "AdminLoginUrl": "https://public.tvbit.local/admin/login"
+    "AdminLoginUrl": "https://public.tvbit.local:10443/admin/login"
   },
   "SMTP": {
     "Host": "smtp.yandex.ru",
@@ -45,7 +45,7 @@
     "From": "noreply@tvbit.co",
     "Password": "xSVMr7WHpszf7DWs"
   },
-  "MasterUrl": "https://master.tvbit.local/",
+  "MasterUrl": "https://master.tvbit.local:10443/",
   "AccountKeysDir": "keys",
   "PathToFfmpeg": "./ffmpeg",
   "LogPath": "logs"
