@@ -2,6 +2,7 @@
 set -euo pipefail
 cp config/.gitconfig ./
 cp config/id_rsa ./.ssh/
+chmod 600 ./.ssh/id_rsa
 if [ ! -d app/supertvbit ]; then
   cd /root/app
   git clone gitlab:g/supertvbit.git supertvbit || true

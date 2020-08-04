@@ -87,13 +87,13 @@ parser.add_argument('--config', default='config.json')
 parser.add_argument('--cluster', type=int)
 parser.add_argument('--norace', dest='race', action='store_false')
 args, _ = parser.parse_known_args()
-os.chdir('/root/app/supertvbit/gopath/src/gitlab.tvbit.co/g/server-go')
-go_build = ['go', 'build', '-o', '/root/wd/server-go', 'main.go']
+os.chdir('/home/nikita/devenv/app/supertvbit/gopath/src/gitlab.tvbit.co/g/server-go')
+go_build = ['go', 'build', '-o', '/home/nikita/devenv/wd/server-go', 'main.go']
 if args.race:
     go_build.insert(2, '--race')
 print(' '.join(go_build))
 subprocess.run(go_build, check=True)
-os.chdir('/root/wd')
+os.chdir('/home/nikita/devenv/wd')
 servers = []
 if args.cluster is not None:
     args.cluster = 7 if args.cluster > 7 else args.cluster
