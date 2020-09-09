@@ -45,7 +45,7 @@ class Node:
                     '--secret=ko5V38Mmh5mXP62pHvnLMYioUBJkGDiX5J1ju9YYuohIMnhZROqiCECXpYzmna4S'
                 ]
                 print(' '.join(server_go))
-                inst = subprocess.Popen(server_go)
+                inst = subprocess.Popen(server_go, start_new_session=True)
                 print(f'node {name} started')
                 pid.put(inst.pid)
             elif command == 'stop':
@@ -97,10 +97,12 @@ base_path = Path.cwd()
 with open('config.json', 'r') as fg:
     config_g = json.load(fg)
 if args.cluster is not None:
-    base_path = base_path / 'server-go'
+    base_path = base_path / 'cluster'
     shutil.rmtree(base_path, ignore_errors=True)
     config_g['Node'] = {
         'AuthKey': AUTH_KEY,
+        'Name': 'node_0',
+        'Master': 'node_0',
         'Nodes': {},
     }
     for i in range(args.cluster - 1):
@@ -113,5 +115,8 @@ else:
     (base_path / 'fatserver.txt').unlink(True)
     servers.append(Node(base_path, config_g, "mono"))
 print('servers', servers)
+signal.sigwait([signal.SIGINT])
+print('sigint received')
 for s in servers:
-    s.thread.join()
+    s.queue.put('stop')
+    s.queue.join()
