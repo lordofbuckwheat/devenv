@@ -123,6 +123,17 @@ def main():
                 'Name': f'node_{i}',
                 'Master': 'node_0',
             }
+            config['StatisticsApi']['ServerAddress'] = f'go.tvbit.local:83{i:02}'
+            config['StatisticsApi']['ServerAddressSSL'] = f'go.tvbit.local:83{i:02}'
+            config['StatisticsApi']['ExternalServerAddress'] = f'http://go.tvbit.local:83{i:02}'
+            config['StatisticsApi']['ExternalServerAddressSSL'] = f'https://go.tvbit.local:83{i:02}'
+            config['Api']['ServerAddress'] = f'go.tvbit.local:82{i:02}'
+            config['Api']['ServerAddressSSL'] = f'go.tvbit.local:82{i:02}'
+            config['Api']['ExternalServerAddress'] = f'go.tvbit.local:82{i:02}'
+            config['Api']['WebSocketURL'] = f'ws://go.tvbit.local:82{i:02}/ws'
+            config['Api']['SecureWebSocketURL'] = f'wss://go.tvbit.local:82{i:02}/ws'
+            config['Api']['ApiURL'] = f'http://go.tvbit.local:82{i:02}/api'
+            config['Api']['SecureApiURL'] = f'https://go.tvbit.local:82{i:02}'
             servers.append(Node(base_path / str(i), config, f'node_{i}'))
     else:
         for p in base_path.glob("tvbit_1_*"):
