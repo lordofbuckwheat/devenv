@@ -104,10 +104,10 @@ def main():
         config = copy.deepcopy(config_origin)
         shutil.rmtree(base_path, ignore_errors=True)
         config['Node'] = {
+            'ServerAddress': 'go.tvbit.local:8486',
             'AuthKey': AUTH_KEY,
             'Name': 'node_0',
-            'Master': 'node_0',
-            'Nodes': {},
+            'Nodes': {}
         }
         for i in range(1, args.cluster):
             config['Node']['Nodes'][f'node_{i}'] = f'https://go.tvbit.local:80{i:02}'
@@ -119,21 +119,21 @@ def main():
         for i in range(1, args.cluster):
             config = copy.deepcopy(config_origin)
             config['Node'] = {
+                'ServerAddress': f'go.tvbit.local:84{i + 1:02}',
                 'AuthKey': AUTH_KEY,
                 'Name': f'node_{i}',
-                'Master': 'node_0',
+                'MasterURL': 'go.tvbit.local:8486'
             }
             config['StatisticsApi']['ServerAddress'] = f'go.tvbit.local:83{i:02}'
-            config['StatisticsApi']['ServerAddressSSL'] = f'go.tvbit.local:83{i:02}'
+            config['StatisticsApi']['ServerAddressSSL'] = f'go.tvbit.local:83{i + 1:02}'
             config['StatisticsApi']['ExternalServerAddress'] = f'http://go.tvbit.local:83{i:02}'
-            config['StatisticsApi']['ExternalServerAddressSSL'] = f'https://go.tvbit.local:83{i:02}'
+            config['StatisticsApi']['ExternalServerAddressSSL'] = f'https://go.tvbit.local:83{i + 1:02}'
             config['Api']['ServerAddress'] = f'go.tvbit.local:82{i:02}'
-            config['Api']['ServerAddressSSL'] = f'go.tvbit.local:82{i:02}'
+            config['Api']['ServerAddressSSL'] = f'go.tvbit.local:82{i + 1:02}'
             config['Api']['ExternalServerAddress'] = f'go.tvbit.local:82{i:02}'
-            config['Api']['WebSocketURL'] = f'ws://go.tvbit.local:82{i:02}/ws'
-            config['Api']['SecureWebSocketURL'] = f'wss://go.tvbit.local:82{i:02}/ws'
+            config['Api']['SecureWebSocketURL'] = f'wss://go.tvbit.local:82{i + 1:02}/ws'
             config['Api']['ApiURL'] = f'http://go.tvbit.local:82{i:02}/api'
-            config['Api']['SecureApiURL'] = f'https://go.tvbit.local:82{i:02}'
+            config['Api']['SecureApiURL'] = f'https://go.tvbit.local:82{i + 1:02}'
             servers.append(Node(base_path / str(i), config, f'node_{i}'))
     else:
         for p in base_path.glob("tvbit_1_*"):
