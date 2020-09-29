@@ -115,8 +115,7 @@ def main():
             path = base_path / str(i)
             subcommand = 'slave'
             config['Node'] = {
-                'ServerAddress': f'go.tvbit.local:85{i:02}',
-                'Name': f'node_{i}'
+                'ServerAddress': f'go.tvbit.local:85{i:02}'
             }
         config['StatisticsApi']['ServerAddress'] = f'go.tvbit.local:83{i:02}'
         config['StatisticsApi']['ServerAddressSSL'] = f'go.tvbit.local:84{i:02}'
