@@ -34,10 +34,7 @@ class Node:
                     inst.terminate()
                     inst.wait()
                     print(f'node {name} interrupted')
-                server_go = [
-                    str(path), subcommand, '--log-mode=1',
-                    '--secret=ko5V38Mmh5mXP62pHvnLMYioUBJkGDiX5J1ju9YYuohIMnhZROqiCECXpYzmna4S'
-                ]
+                server_go = [str(path), subcommand, '--log-mode=1']
                 print(' '.join(server_go))
                 inst = subprocess.Popen(server_go, start_new_session=True, cwd=path.parent)
                 print(f'node {name} started')
@@ -62,6 +59,23 @@ class Node:
 
     def __repr__(self):
         return f'{self.name}: {self.pid}'
+
+
+def switch_panel(port, ssl_port):
+    with open('/home/nikita/devenv/app/supertvbit/public/panel/src/panel_config.json', 'w') as f:
+        f.write(f'''{{
+            "SITE_URL": "http://public.tvbit.local:10080/",
+            "PUBLIC_HOST": "http://public.tvbit.local:10080/",
+            "API_URL": "http://go.tvbit.local:{port}/",
+            "WEBSOCKET_URL": "ws://go.tvbit.local:{port}/ws",
+            "WEBSOCKET_ADMIN_URL": "ws://go.tvbit.local:{port}/ws-admin",
+            "SECURE_PUBLIC_HOST": "https://public.tvbit.local:10443/",
+            "SECURE_API_URL": "https://go.tvbit.local:{ssl_port}/",
+            "SECURE_WEBSOCKET_URL": "wss://go.tvbit.local:{ssl_port}/ws",
+            "SECURE_WEBSOCKET_ADMIN_URL": "wss://go.tvbit.local:{ssl_port}/ws-admin",
+            "DOCS_URL": "docs",
+            "PANEL_FEATURES": []
+        }}''')
 
 
 def read_commands(servers: List[Node]):
@@ -138,11 +152,13 @@ def main():
     t.start()
 
     print('servers', servers)
+    switch_panel(8100, 8200)
     signal.sigwait([signal.SIGINT])
     print('sigint received')
     for s in servers:
         s.queue.put('stop')
         s.queue.join()
+    switch_panel(8285, 8286)
 
 
 main()
