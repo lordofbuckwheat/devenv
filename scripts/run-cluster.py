@@ -25,7 +25,7 @@ class Node:
         self.queue = q
 
     @staticmethod
-    def run_inst(path: Path, q, pid, subcommand, name):
+    def run_inst(path: Path, q: queue.Queue, pid, subcommand, name):
         inst = None
         while True:
             command = q.get()
@@ -33,25 +33,25 @@ class Node:
                 if inst and inst.poll() is None:
                     inst.terminate()
                     inst.wait()
-                    print(f'node {name} interrupted')
+                    print(f'node {name} interrupted', flush=True)
                 server_go = [str(path), subcommand, '--log-mode=1']
-                print(' '.join(server_go))
+                print(' '.join(server_go), flush=True)
                 inst = subprocess.Popen(server_go, start_new_session=True, cwd=path.parent)
-                print(f'node {name} started')
+                print(f'node {name} started', flush=True)
                 pid.put(inst.pid)
             elif command == 'stop':
                 if inst and inst.poll() is not None:
-                    print(f'node {name} already stopped')
+                    print(f'node {name} already stopped', flush=True)
                 else:
                     inst.terminate()
                     inst.wait()
-                    print(f'node {name} stopped')
+                    print(f'node {name} stopped', flush=True)
             elif command == 'status':
                 st = inst.poll()
                 if st is None:
-                    print(f'node {name} is running')
+                    print(f'node {name} is running', flush=True)
                 else:
-                    print(f'node {name} exited with code {st}')
+                    print(f'node {name} exited with code {st}', flush=True)
             elif command == 'reload':
                 if inst.poll() is None:
                     inst.send_signal(signal.SIGHUP)
@@ -79,40 +79,42 @@ def switch_panel(port, ssl_port):
 
 
 def read_commands(servers: List[Node]):
-    while True:
-        command = input()
-        parts = command.split(' ')
-        action = parts[0]
-        if action == 'status':
-            for s in servers:
-                s.queue.put('status')
-        else:
-            node = None
-            for s in servers:
-                if s.name == parts[1]:
-                    node = s
-            if node is None:
-                print('invalid node name')
-                continue
-            if action == 'start':
-                node.queue.put('start')
-            elif action == 'stop':
-                node.queue.put('stop')
+    try:
+        while True:
+            command = input()
+            parts = command.split(' ')
+            action = parts[0]
+            if action == 'status':
+                for s in servers:
+                    s.queue.put('status')
+            elif action == 'stop' and len(parts) < 2:
+                return
+            else:
+                node = None
+                for s in servers:
+                    if s.name == parts[1]:
+                        node = s
+                if node is None:
+                    print('invalid node name')
+                    continue
+                if action == 'start':
+                    node.queue.put('start')
+                elif action == 'stop':
+                    node.queue.put('stop')
+    except EOFError:
+        print('eof received')
 
 
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--size', type=int, required=True)
     args, _ = parser.parse_known_args()
-
     shared.build_and_upload_servers()
-
     servers = []
     base_path = Path.cwd() / 'cluster'
     shutil.rmtree(base_path, ignore_errors=True)
     with open('config.json', 'r') as f:
         config_origin = json.load(f)
-
     for i in range(args.size):
         config = copy.deepcopy(config_origin)
         if i == 0:
@@ -137,9 +139,9 @@ def main():
         config['StatisticsApi']['ExternalServerAddressSSL'] = f'https://go.tvbit.local:84{i:02}'
         config['Api']['ServerAddress'] = f'go.tvbit.local:81{i:02}'
         config['Api']['ServerAddressSSL'] = f'go.tvbit.local:82{i:02}'
-        config['Api']['ExternalServerAddress'] = f'go.tvbit.local:81{i:02}'
+        config['Api']['WebSocketURL'] = f'ws://go.tvbit.local:81{i:02}/ws'
         config['Api']['SecureWebSocketURL'] = f'wss://go.tvbit.local:82{i:02}/ws'
-        config['Api']['ApiURL'] = f'http://go.tvbit.local:81{i:02}/api'
+        config['Api']['ApiURL'] = f'http://go.tvbit.local:81{i:02}'
         config['Api']['SecureApiURL'] = f'https://go.tvbit.local:82{i:02}'
         path.mkdir(parents=True, exist_ok=True)
         shutil.copy2('server.key', path)
@@ -147,16 +149,14 @@ def main():
         with open(path / 'config.json', 'w') as f:
             json.dump(config, f)
         servers.append(Node(path, subcommand, f'node_{i}'))
-
-    t = threading.Thread(target=read_commands, args=(servers,), daemon=True)
-    t.start()
-
     print('servers', servers)
+    t = threading.Thread(target=read_commands, args=(servers,))
+    t.start()
     switch_panel(8100, 8200)
-    signal.sigwait([signal.SIGINT])
-    print('sigint received')
+    t.join()
     for s in servers:
         s.queue.put('stop')
+    for s in servers:
         s.queue.join()
     switch_panel(8285, 8286)
 

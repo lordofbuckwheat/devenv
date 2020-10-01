@@ -19,25 +19,24 @@
   "Api": {
     "ServerAddress": "go.tvbit.local:8285",
     "ServerAddressSSL": "go.tvbit.local:8286",
-    "IndexPageUrl": "http://public.tvbit.local:10080/public/index.html",
+    "IndexPageURL": "http://public.tvbit.local:10080/public/index.html",
     "SecureIndexPageURL": "https://public.tvbit.local:10443/public/index.html",
-    "UploadUrl": "/apidata",
+    "UploadURL": "/apidata",
     "UploadPath": "/home/nikita/devenv/wd/web/public/apidata",
     "ReservationTimeout": 300,
-    "BaseUrl": "http://public.tvbit.local/",
-    "ExternalServerAddress": "go.tvbit.local:8285",
+    "BaseURL": "http://public.tvbit.local/",
     "SSLCertFile": "/home/nikita/devenv/ws/ssl/server.crt",
     "SSLKeyFile": "/home/nikita/devenv/ws/ssl/server.key",
     "WebSocketURL": "ws://go.tvbit.local:8285/ws",
     "SecureWebSocketURL": "wss://go.tvbit.local:8286/ws",
-    "ApiURL": "http://go.tvbit.local:8285/api",
+    "ApiURL": "http://go.tvbit.local:8285",
     "SecureApiURL": "https://go.tvbit.local:8286",
     "AccountApiKeys": {
       "yandex": "18adaa44-ee1f-4cb0-9558-c14308618f2b",
       "yandex_enterprise": "",
       "openweathermap": "e2731a49d873da84b894d1d5bfc621e6"
     },
-    "AdminLoginUrl": "https://public.tvbit.local:10443/admin/login"
+    "AdminLoginURL": "https://public.tvbit.local:10443/admin/login"
   },
   "SMTP": {
     "Host": "smtp.yandex.ru",

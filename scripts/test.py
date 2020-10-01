@@ -1,9 +1,20 @@
 import threading
-import time
-import queue
-import signal
 
-x = {1, 2, 3}
-x.add(4)
-x.add(2)
-print(x)
+
+def read_commands():
+    try:
+        while True:
+            command = input()
+            print(f'message: {command}')
+    except EOFError:
+        print("interrupted")
+
+
+def main():
+    t = threading.Thread(target=read_commands)
+    t.start()
+    t.join()
+    print('done')
+
+
+main()
