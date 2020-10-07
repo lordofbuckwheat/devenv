@@ -120,29 +120,29 @@ def main():
         if i == 0:
             path = base_path / 'master'
             subcommand = 'master'
-            config['Node'] = {
-                'Name': 'node_0',
-                'Nodes': {}
+            config['node'] = {
+                'name': 'node_0',
+                'nodes': {}
             }
             for j in range(1, args.size):
-                config['Node']['Nodes'][f'node_{j}'] = f'https://go.tvbit.local:85{j:02}'
+                config['node']['nodes'][f'node_{j}'] = f'https://go.tvbit.local:85{j:02}'
             shutil.copytree('keys', path / 'keys')
         else:
             path = base_path / str(i)
             subcommand = 'slave'
-            config['Node'] = {
-                'ServerAddress': f'go.tvbit.local:85{i:02}'
+            config['node'] = {
+                'server_address': f'go.tvbit.local:85{i:02}'
             }
-        config['StatisticsApi']['ServerAddress'] = f'go.tvbit.local:83{i:02}'
-        config['StatisticsApi']['ServerAddressSSL'] = f'go.tvbit.local:84{i:02}'
-        config['StatisticsApi']['ExternalServerAddress'] = f'http://go.tvbit.local:83{i:02}'
-        config['StatisticsApi']['ExternalServerAddressSSL'] = f'https://go.tvbit.local:84{i:02}'
-        config['Api']['ServerAddress'] = f'go.tvbit.local:81{i:02}'
-        config['Api']['ServerAddressSSL'] = f'go.tvbit.local:82{i:02}'
-        config['Api']['WebSocketURL'] = f'ws://go.tvbit.local:81{i:02}/ws'
-        config['Api']['SecureWebSocketURL'] = f'wss://go.tvbit.local:82{i:02}/ws'
-        config['Api']['ApiURL'] = f'http://go.tvbit.local:81{i:02}'
-        config['Api']['SecureApiURL'] = f'https://go.tvbit.local:82{i:02}'
+        config['statistics']['api']['address']['insecure'] = f'go.tvbit.local:83{i:02}'
+        config['statistics']['api']['address']['secure'] = f'go.tvbit.local:84{i:02}'
+        config['statistics']['api']['external_address']['insecure'] = f'http://go.tvbit.local:83{i:02}'
+        config['statistics']['api']['external_address']['secure'] = f'https://go.tvbit.local:84{i:02}'
+        config['api']['address']['insecure'] = f'go.tvbit.local:81{i:02}'
+        config['api']['address']['secure'] = f'go.tvbit.local:82{i:02}'
+        config['api']['websocket_url']['insecure'] = f'ws://go.tvbit.local:81{i:02}/ws'
+        config['api']['websocket_url']['secure'] = f'wss://go.tvbit.local:82{i:02}/ws'
+        config['api']['api_url']['insecure'] = f'http://go.tvbit.local:81{i:02}'
+        config['api']['api_url']['secure'] = f'https://go.tvbit.local:82{i:02}'
         path.mkdir(parents=True, exist_ok=True)
         shutil.copy2('server.key', path)
         shutil.copy2('server-dist/thin', path)

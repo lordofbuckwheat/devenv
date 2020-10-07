@@ -1,51 +1,69 @@
 {
-  "Db": {
-    "ConnectString": "root:root@tcp(localhost:13306)/tvbit",
-    "PathToMysqlDump": "mysqldump"
+  "mysql_db": "root:root@tcp(localhost:13306)/tvbit",
+  "clickhouse_db": "tcp://localhost:19000?username=default&password=&database=tvbit",
+  "statistics": {
+    "aggregation_interval": 300,
+    "primary_data_lifetime": 7,
+    "api": {
+      "address": {
+        "insecure": "go.tvbit.local:8385",
+        "secure": "go.tvbit.local:8386"
+      },
+      "external_address": {
+        "insecure": "http://go.tvbit.local:8385",
+        "secure": "https://go.tvbit.local:8386"
+      },
+      "ssl_cert_file": "/home/nikita/devenv/ws/ssl/server.crt",
+      "ssl_key_file": "/home/nikita/devenv/ws/ssl/server.key"
+    }
   },
-  "ClickHouseDB": {
-    "ConnectString": "tcp://localhost:19000?username=default&password=&database=tvbit"
-  },
-  "StatisticsApi": {
-    "ServerAddress": "go.tvbit.local:8385",
-    "ServerAddressSSL": "go.tvbit.local:8386",
-    "ExternalServerAddress": "http://go.tvbit.local:8385",
-    "ExternalServerAddressSSL": "https://go.tvbit.local:8386",
-    "SSLCertFile": "/home/nikita/devenv/ws/ssl/server.crt",
-    "SSLKeyFile": "/home/nikita/devenv/ws/ssl/server.key",
-    "AggregationInterval": 300,
-    "PrimaryDataLifetime": 7
-  },
-  "Api": {
-    "ServerAddress": "go.tvbit.local:8285",
-    "ServerAddressSSL": "go.tvbit.local:8286",
-    "IndexPageURL": "http://public.tvbit.local:10080/public/index.html",
-    "SecureIndexPageURL": "https://public.tvbit.local:10443/public/index.html",
-    "UploadURL": "/apidata",
-    "UploadPath": "/home/nikita/devenv/wd/web/public/apidata",
-    "ReservationTimeout": 300,
-    "BaseURL": "http://public.tvbit.local/",
-    "SSLCertFile": "/home/nikita/devenv/ws/ssl/server.crt",
-    "SSLKeyFile": "/home/nikita/devenv/ws/ssl/server.key",
-    "WebSocketURL": "ws://go.tvbit.local:8285/ws",
-    "SecureWebSocketURL": "wss://go.tvbit.local:8286/ws",
-    "ApiURL": "http://go.tvbit.local:8285",
-    "SecureApiURL": "https://go.tvbit.local:8286",
-    "AccountApiKeys": {
-      "yandex": "18adaa44-ee1f-4cb0-9558-c14308618f2b",
-      "yandex_enterprise": "",
-      "openweathermap": "e2731a49d873da84b894d1d5bfc621e6"
+  "api": {
+    "ip": {
+      "insecure": "127.0.0.1",
+      "secure": "127.0.0.1"
     },
-    "AdminLoginURL": "https://public.tvbit.local:10443/admin/login"
+    "port": 8285,
+    "port_ssl": 8286,
+    "address": {
+      "insecure": "go.tvbit.local:8285",
+      "secure": "go.tvbit.local:8286"
+    },
+    "websocket_url": {
+      "insecure": "ws://go.tvbit.local:8285/ws",
+      "secure": "wss://go.tvbit.local:8286/ws"
+    },
+    "api_url": {
+      "insecure": "http://go.tvbit.local:8285",
+      "secure": "https://go.tvbit.local:8286"
+    },
+    "ssl_cert_file": "/home/nikita/devenv/ws/ssl/server.crt",
+    "ssl_key_file": "/home/nikita/devenv/ws/ssl/server.key"
   },
-  "SMTP": {
-    "Host": "smtp.yandex.ru",
-    "Port": 465,
-    "From": "noreply@tvbit.co",
-    "Password": "xSVMr7WHpszf7DWs"
+  "reservation_timeout": 300,
+  "default_page_length": 50,
+  "account_api_keys": {
+    "yandex": "18adaa44-ee1f-4cb0-9558-c14308618f2b",
+    "yandex_enterprise": "",
+    "openweathermap": "e2731a49d873da84b894d1d5bfc621e6"
   },
-  "MasterUrl": "https://master.tvbit.local:10443/",
-  "AccountKeysDir": "keys",
-  "PathToFfmpeg": "./ffmpeg",
-  "LogPath": "logs"
+  "smtp": {
+    "host": "smtp.yandex.ru",
+    "port": 465,
+    "from": "noreply@tvbit.co",
+    "password": "xSVMr7WHpszf7DWs"
+  },
+  "master_url": "https://master.tvbit.local:10443",
+  "account_keys_dir": "keys",
+  "server_key_path": "server.key",
+  "log": {
+    "min_level": "debug",
+    "mode": 0,
+    "path": "logs"
+  },
+  "public_url": {
+    "insecure": "http://public.tvbit.local:10080",
+    "secure": "https://public.tvbit.local:10443"
+  },
+  "ffmpeg_path": "./ffmpeg",
+  "upload_path": "/home/nikita/devenv/wd/web"
 }
