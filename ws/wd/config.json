@@ -64,6 +64,6 @@
     "insecure": "http://public.tvbit.local:10080",
     "secure": "https://public.tvbit.local:10443"
   },
-  "ffmpeg_path": "./ffmpeg",
+  "ffmpeg_exec": "./ffmpeg",
   "upload_path": "/home/nikita/devenv/wd/web"
 }

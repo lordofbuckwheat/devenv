@@ -109,7 +109,7 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--size', type=int, required=True)
     args, _ = parser.parse_known_args()
-    shared.build_and_upload_servers()
+    shared.build_and_upload_servers('https://master.tvbit.local:10443')
     servers = []
     base_path = Path.cwd() / 'cluster'
     shutil.rmtree(base_path, ignore_errors=True)

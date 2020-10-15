@@ -1,9 +1,9 @@
 import argparse
-import os
 import subprocess
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--server_url', dest='server_url', default='http://go.tvbit.local:8285')
+parser.add_argument('--server-url', dest='server_url', default='http://go.tvbit.local:8285')
+parser.add_argument('--node', dest='node', type=int)
 parser.add_argument('--uuid', dest='uuid', default='linux-dummy')
 parser.add_argument('--title', dest='title', default='linux-dummy-device')
 parser.add_argument('--account_key', dest='account_key',
@@ -21,8 +21,10 @@ with open('/home/nikita/devenv/wd/organization.key', 'wt') as f:
         args.account_key,
         args.server_url,
     ]))
-os.chdir('/home/nikita/devenv/wd')
+if args.node:
+    args.uuid = f'{args.uuid}_{args.node}'
+    args.title = f'{args.title}_{args.node}'
 subprocess.run([
     './tvbit-client', 'start', f'--server_url={args.server_url}', f'--account_key={args.account_key}',
     f'--title={args.title}', f'--uuid={args.uuid}', '--electron_path=electron-dist/ui', '--dev'
-], check=True)
+], check=True, cwd='/home/nikita/devenv/wd')
