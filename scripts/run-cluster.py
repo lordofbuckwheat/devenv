@@ -108,6 +108,7 @@ def read_commands(servers: List[Node]):
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--size', type=int, required=True)
+    parser.add_argument('--admin-node', type=int, dest='admin_node')
     args, _ = parser.parse_known_args()
     shared.build_and_upload_servers('https://master.tvbit.local:10443')
     servers = []
@@ -152,7 +153,10 @@ def main():
     print('servers', servers)
     t = threading.Thread(target=read_commands, args=(servers,))
     t.start()
-    switch_panel(8100, 8200)
+    admin_node = args.admin_node
+    if not admin_node:
+        admin_node = 0
+    switch_panel(8100 + admin_node, 8200 + admin_node)
     t.join()
     for s in servers:
         s.queue.put('stop')
