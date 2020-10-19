@@ -2,6 +2,7 @@
 set -euo pipefail
 cp config/.gitconfig ./
 cp config/id_rsa ./.ssh/
+git config --global url."ssh://git@gitlab.tvbit.co:2816".insteadOf "https://gitlab.tvbit.co"
 chmod 600 ./.ssh/id_rsa
 if [ ! -d app/supertvbit ]; then
   cd /root/app
@@ -33,6 +34,7 @@ if [ ! -d app/supertvbit ]; then
   cd /root/app/supertvbit
   ./scripts/deploy.sh --hostname=https://master.tvbit.local --silent
 fi
+go env -w GOPRIVATE=gitlab.tvbit.co
 cp /root/panel_config.json /root/app/supertvbit/public/panel/src/
 rsync -va /root/_wd/ /root/wd
 cd /root/app
