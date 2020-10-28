@@ -69,7 +69,7 @@ def build_and_upload_servers(server_url, forced, license_id=None):
                 break
             elif choice == 'n':
                 return
-    if fat_version > fat_remote_version:
+    if fat_version > fat_remote_version or forced and fat_version == fat_remote_version:
         with open('/home/nikita/devenv/wd/server-dist/fat', 'rb') as f:
             resp = requests.post(server_url, {
                 'master_key': 'ko5V38Mmh5mXP62pHvnLMYioUBJkGDiX5J1ju9YYuohIMnhZROqiCECXpYzmna4S',
@@ -85,7 +85,7 @@ def build_and_upload_servers(server_url, forced, license_id=None):
             })
             print(resp.text)
         print('fat uploaded')
-    if thin_version > thin_remote_version:
+    if thin_version > thin_remote_version or forced and thin_version == thin_remote_version:
         with open('/home/nikita/devenv/wd/server-dist/thin', 'rb') as f:
             resp = requests.post(server_url, {
                 'master_key': 'ko5V38Mmh5mXP62pHvnLMYioUBJkGDiX5J1ju9YYuohIMnhZROqiCECXpYzmna4S',

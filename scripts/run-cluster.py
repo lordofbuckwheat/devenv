@@ -12,6 +12,13 @@ from typing import List
 import shared
 
 
+class Command:
+
+    def __init__(self, name, data=None):
+        self.name = name
+        self.data = data
+
+
 class Node:
 
     def __init__(self, path: Path, subcommand, name):
@@ -19,7 +26,7 @@ class Node:
         pid = queue.Queue()
         t = threading.Thread(target=Node.run_inst, args=(path / 'thin', q, pid, subcommand, name), daemon=True)
         t.start()
-        q.put('start')
+        q.put(Command('start'))
         self.name = name
         self.pid = pid.get()
         self.queue = q
@@ -28,33 +35,41 @@ class Node:
     def run_inst(path: Path, q: queue.Queue, pid, subcommand, name):
         inst = None
         while True:
-            command = q.get()
-            if command == 'start':
+            command: Command = q.get()
+            if command.name == 'start':
                 if inst and inst.poll() is None:
                     inst.terminate()
                     inst.wait()
                     print(f'node {name} interrupted', flush=True)
                 server_go = [str(path), subcommand, '--log-mode=1']
                 print(' '.join(server_go), flush=True)
-                inst = subprocess.Popen(server_go, start_new_session=True, cwd=path.parent)
+                inst = subprocess.Popen(server_go, start_new_session=True, cwd=path.parent, stdin=subprocess.PIPE,
+                                        universal_newlines=True)
                 print(f'node {name} started', flush=True)
                 pid.put(inst.pid)
-            elif command == 'stop':
+            elif command.name == 'stop':
                 if inst and inst.poll() is not None:
                     print(f'node {name} already stopped', flush=True)
                 else:
                     inst.terminate()
                     inst.wait()
                     print(f'node {name} stopped', flush=True)
-            elif command == 'status':
+            elif command.name == 'status':
                 st = inst.poll()
                 if st is None:
                     print(f'node {name} is running', flush=True)
                 else:
                     print(f'node {name} exited with code {st}', flush=True)
-            elif command == 'reload':
+            elif command.name == 'reload':
                 if inst.poll() is None:
                     inst.send_signal(signal.SIGHUP)
+            elif command.name == 'stdin':
+                st = inst.poll()
+                if st is not None:
+                    print(f'node {name} exited with code {st}', flush=True)
+                else:
+                    inst.stdin.write(f'{command.data}\n')
+                    inst.stdin.flush()
             q.task_done()
 
     def __repr__(self):
@@ -86,10 +101,14 @@ def read_commands(servers: List[Node]):
             action = parts[0]
             if action == 'status':
                 for s in servers:
-                    s.queue.put('status')
-            elif action == 'stop' and len(parts) < 2:
-                return
+                    s.queue.put(Command('status'))
+            elif action == 'global-stop':
+                servers[0].queue.put(Command('stdin', 'stop'))
+            elif action == 'global-start':
+                servers[0].queue.put(Command('stdin', 'start'))
             else:
+                if len(parts) < 2:
+                    return
                 node = None
                 for s in servers:
                     if s.name == parts[1]:
@@ -98,9 +117,9 @@ def read_commands(servers: List[Node]):
                     print('invalid node name')
                     continue
                 if action == 'start':
-                    node.queue.put('start')
+                    node.queue.put(Command('start'))
                 elif action == 'stop':
-                    node.queue.put('stop')
+                    node.queue.put(Command('stop'))
     except EOFError:
         print('eof received')
 
@@ -159,7 +178,7 @@ def main():
     switch_panel(8100 + admin_node, 8200 + admin_node)
     t.join()
     for s in servers:
-        s.queue.put('stop')
+        s.queue.put(Command('stop'))
     for s in servers:
         s.queue.join()
     switch_panel(8285, 8286)
