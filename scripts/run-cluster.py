@@ -144,15 +144,18 @@ def main():
                 'name': 'node_0',
                 'nodes': {}
             }
+            config['balancer_deviation'] = 80
             for j in range(1, args.size):
                 config['node']['nodes'][f'node_{j}'] = f'https://go.tvbit.local:85{j:02}'
-            shutil.copytree('keys', path / 'keys')
+            config['account_keys_dir'] = str(Path(config['account_keys_dir']).resolve())
         else:
             path = base_path / str(i)
             subcommand = 'slave'
             config['node'] = {
                 'server_address': f'go.tvbit.local:85{i:02}'
             }
+            del config['account_keys_dir']
+        config['ffmpeg_exec'] = str(Path(config['ffmpeg_exec']).resolve())
         config['statistics']['api']['address']['insecure'] = f'go.tvbit.local:83{i:02}'
         config['statistics']['api']['address']['secure'] = f'go.tvbit.local:84{i:02}'
         config['statistics']['api']['external_address']['insecure'] = f'http://go.tvbit.local:83{i:02}'
