@@ -128,6 +128,7 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--size', type=int, required=True)
     parser.add_argument('--admin-node', type=int, dest='admin_node')
+    parser.add_argument('--master-potency', type=float, dest='master_potency')
     args, _ = parser.parse_known_args()
     shared.build_and_upload_servers('https://master.tvbit.local:10443', True)
     servers = []
@@ -144,7 +145,10 @@ def main():
                 'name': 'node_0',
                 'nodes': {}
             }
-            config['balancer_deviation'] = 80
+            if args.master_potency is not None:
+                config['cluster'] = {
+                    'master_potency': args.master_potency
+                }
             for j in range(1, args.size):
                 config['node']['nodes'][f'node_{j}'] = f'https://go.tvbit.local:85{j:02}'
             config['account_keys_dir'] = str(Path(config['account_keys_dir']).resolve())
