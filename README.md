@@ -55,7 +55,7 @@
     127.0.0.1 go.tvbit.co
     127.0.0.1 master.tvbit.co
     ```
-12. Add rootCA.pem to your trusted certificate authorities
+12. Add rootCA.pem to your trusted certificate authorities. In Chrome go to Settings -> Security -> Manage certificates -> Authorities -> Import
 13. ```
     docker-compose build
     docker-compose up -d
