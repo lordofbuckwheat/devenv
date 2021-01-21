@@ -17,6 +17,7 @@ if [ ! -d app/supertvbit ]; then
   git checkout master --
   cd /root/app/supertvbit/master
   git checkout master --
+  touch migrations/ready
   cd php
   composer install
   mv /root/master-config.yml config/config.yml

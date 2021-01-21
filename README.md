@@ -48,13 +48,56 @@
         name = lordofbuckwheat
         email = lord.of.buckwheat@gmail.com
     ```
-11. ```
+11. Add hosts to your /etc/hosts:
+    ```
+    127.0.0.1 public.tvbit.co
+    127.0.0.1 admin.tvbit.co
+    127.0.0.1 go.tvbit.co
+    127.0.0.1 master.tvbit.co
+    ```
+12. Add rootCA.pem to your trusted certificate authorities
+13. ```
     docker-compose build
     docker-compose up -d
     docker-compose logs -f
     ```
-12. After containers are up connect to `ws` with
+14. After containers are up connect to `ws` with
     ```
     ./connect.sh
     ```
-13. Add rootCA.pem to your trusted certificate authorities
+15. Run commands in `ws` container:
+    - start client server:
+      ```
+      cd ~/scripts
+      ./run.sh
+      ```
+    - run angular in production mode
+      ```
+      cd ~/app/supertvbit/public/panel
+      npm run prod
+      ```
+    - run angular in development mode
+      ```
+      cd ~/app/supertvbit/public/panel
+      npm run start
+      ```
+16. Services available on docker host:
+    - admin panel in production mode:
+      ```
+      http://public.tvbit.local:10080/admin
+      https://public.tvbit.local:10443/admin
+      ```
+    - admin panel in development mode:
+      ```
+      http://localhost:14200/admin
+      http://admin.tvbit.local:10080/admin
+      ```
+    - client server api:
+      ```
+      http://go.tvbit.local:18285
+      https://go.tvbit.local:18286
+      ```
+    - master server:
+      ```
+      https://master.tvbit.local:10443
+      ```
