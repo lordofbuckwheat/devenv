@@ -43,18 +43,18 @@
    mkdir config
    ```
 10. Copy your `.gitconfig` and private rsa key to `config` directory. `.gitconfig` example:
-   ```
-   [user]
-       name = lordofbuckwheat
-       email = lord.of.buckwheat@gmail.com
-   ```
+    ```
+    [user]
+        name = lordofbuckwheat
+        email = lord.of.buckwheat@gmail.com
+    ```
 11. ```
     docker-compose build
     docker-compose up -d
     docker-compose logs -f
     ```
 12. After containers are up connect to `ws` with
-   ```
-   ./connect.sh
-   ```
+    ```
+    ./connect.sh
+    ```
 13. Add rootCA.pem to your trusted certificate authorities
