@@ -50,10 +50,10 @@
     ```
 11. Add hosts to your /etc/hosts:
     ```
-    127.0.0.1 public.tvbit.co
-    127.0.0.1 admin.tvbit.co
-    127.0.0.1 go.tvbit.co
-    127.0.0.1 master.tvbit.co
+    127.0.0.1 public.tvbit.local
+    127.0.0.1 admin.tvbit.local
+    127.0.0.1 go.tvbit.local
+    127.0.0.1 master.tvbit.local
     ```
 12. Add rootCA.pem to your trusted certificate authorities. In Chrome go to Settings -> Security -> Manage certificates -> Authorities -> Import
 13. ```
