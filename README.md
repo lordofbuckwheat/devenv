@@ -36,17 +36,9 @@
    ```
 7. Generate rsa key pair with **no** passphrase
 8. Add your public rsa key to <https://gitlab.tvbit.co:4115/profile/keys>
-9. Create host in `~/.ssh/config`:
-    ```
-    Host gitlab
-        Port 2816
-        HostName gitlab.tvbit.co
-        User git
-        IdentityFile ~/.ssh/id_rsa
-    ```
 9. Clone the repository
    ```
-   git clone gitlab:g/devenv.git
+   git clone https://github.com/lordofbuckwheat/devenv
    cd devenv
    mkdir config
    ```
