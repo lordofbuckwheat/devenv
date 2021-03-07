@@ -69,7 +69,7 @@
     - start client server:
       ```
       cd ~/scripts
-      ./run.sh
+      ./run.sh config_host.json
       ```
     - run angular in production mode
       ```
@@ -101,3 +101,11 @@
       ```
       https://master.tvbit.local:10443
       ```
+
+# Building linux client
+1. Clone https://gitlab.tvbit.co:4115/g/electron-core and https://gitlab.tvbit.co:4115/g/linux-client to `app`
+2. In `ws` container run
+    ```
+    python3 /root/scripts/pack-linux.py --version=0.2.4
+    ```
+3. Archives will appear in `/root/wd/linux-client-build`
